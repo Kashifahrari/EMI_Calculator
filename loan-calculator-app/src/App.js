@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LoanProvider } from "./context/LoanContext";
+import Layout from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import CalculatorPage from "./pages/CalculatorPage";
+import CurrencyPage from "./pages/CurrencyPage";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoanProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/calculator" element={<CalculatorPage />} />
+            <Route path="/currency" element={<CurrencyPage />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </LoanProvider>
   );
 }
 
